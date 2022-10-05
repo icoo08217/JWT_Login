@@ -1,5 +1,13 @@
 spring:
-  profiles:
-    active: dev
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
   datasource:
-
+    url: jdbc:mariadb://127.0.0.1:3306/jwtLogin?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul
+    username: root
+    password: rh741010!
+  jpa:
+    hibernate:
+      ddl-auto: create
