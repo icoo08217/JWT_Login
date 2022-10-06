@@ -1,7 +1,14 @@
 package com.ll.exam.JWT_Login.app.security.jwt;
 
+import com.ll.exam.JWT_Login.util.Util;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import javax.crypto.SecretKey;
+import java.util.Date;
+import java.util.Map;
 
 @Component
 @RequiredArgsConstructor

@@ -2,6 +2,7 @@ package com.ll.exam.JWT_Login.app.member.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ll.exam.JWT_Login.app.base.entity.BaseEntity;
+import com.ll.exam.JWT_Login.util.Util;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +13,7 @@ import javax.persistence.Entity;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @Getter @Setter
@@ -38,5 +40,16 @@ public class Member extends BaseEntity {
         authorities.add(new SimpleGrantedAuthority("MEMBER"));
 
         return authorities;
+    }
+
+    public Map<String, Object> getAccessTokenClaims() {
+        return Util.mapOf(
+                "id", getId(),
+                "createDate", getCreateDate(),
+                "modifyDate", getModifyDate(),
+                "username", getUsername(),
+                "email", getEmail(),
+                "authorities", getAuthorities()
+        );
     }
 }
