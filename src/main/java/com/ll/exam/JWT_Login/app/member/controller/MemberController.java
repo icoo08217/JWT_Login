@@ -30,6 +30,7 @@ public class MemberController {
     @PostMapping("/login")
     public ResponseEntity<RsData> login(@RequestBody LoginDto loginDto) {
 
+
         if (loginDto.isNotValid()) {
             return Util.spring.responseEntityOf(RsData.of("F-1" , "로그인 정보가 올바르지 않습니다."));
         }
@@ -44,10 +45,17 @@ public class MemberController {
             return Util.spring.responseEntityOf(RsData.of("F-3", "비밀번호가 일치하지 않습니다."));
         }
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authentication" , "JWT_Access_Token");
+        String accessToken = "JWT_Access_Token";
 
-        return Util.spring.responseEntityOf(RsData.of("S-1", "로그인에 성공하였습니다. Access Token을 발급합니다."), headers);
+        return Util.spring.responseEntityOf(
+                RsData.of(
+                        "S-1",
+                        "로그인 성공, Access Token을 발급합니다.",
+                        Util.mapOf(
+                                "accessToken", accessToken
+                        )
+                ),
+                Util.spring.httpHeadersOf("Authentication", accessToken));
     }
 
     @Data
